@@ -2,7 +2,7 @@ from datetime import date
 
 import scrapy
 
-
+# Nutrition info not available on website anymore
 class A48CommonroomsSpider(scrapy.Spider):
     name = '48_CommonRooms'
     allowed_domains = ['https://tkmenus.com']
