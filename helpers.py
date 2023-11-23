@@ -19,7 +19,7 @@ from define_collection_wave import folder
 import platform
 
 # Define paths 
-root_path = '/Users/jamie/MenuTracker'
+root_path = '/Users/jamie/Menu_Tracker'
 web_browser_path = '/Users/jamie/chromedriver-mac-x64/chromedriver'
 
 # windows or osx
