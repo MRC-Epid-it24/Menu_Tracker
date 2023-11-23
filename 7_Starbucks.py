@@ -48,7 +48,11 @@ starbucks = []
 for item in item_all:
     item_id = item.get('productNumber')
     item_name = item.get('name')
+    # skip non-food items
+    if item_name == 'Colour Changing Reusable Hot Cup 16oz':
+        break
     print(item_name)
+
     url = item.get('href')
     elementId = item.get('elementId')
     page = requests.get(f'https://www.starbucks.co.uk/menu/product/info/{item_id}').json()
