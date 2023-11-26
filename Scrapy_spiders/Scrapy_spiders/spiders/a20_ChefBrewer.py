@@ -29,6 +29,7 @@ class A20ChefbrewerSpider(scrapy.Spider):
                 items = subsection.xpath('./div[@class="menuItem"]')
                 for item in items:
                     item_data = item.xpath('./p/span/text()').getall()
+                    print("item_data: \n", item_data, "\n")
                     try:
                         kcal = re.search('([0-9]* kcal)', item_data[1]).group(1).replace(' kcal', '')
                     except:

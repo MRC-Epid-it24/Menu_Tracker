@@ -64,6 +64,7 @@ class A12BurgerkingSpider(scrapy.Spider):
             categories = self.driver.find_elements(by=By.XPATH, value='//section[contains(@class, "Container")]')
             category = categories[i]
             cat_name = category.find_element_by_xpath('.//h2').text
+            print(cat_name, "found\n")
             category.click()
             sleep(5)
             items = category.find_elements(by=By.XPATH, value='.//div[contains(@class,"clickable-container")]')
@@ -72,13 +73,16 @@ class A12BurgerkingSpider(scrapy.Spider):
                 item.click()
                 sleep(2)
                 resp = Selector(text=self.driver.page_source)
-                item_element = resp.xpath('//div[contains(@class,"content-wrapper__ContentWrapper-fh0wv8-0")]')
+                item_element = resp.xpath('//div[contains(@class,"content-wrapper__ContentWrapper")]')
                 if len(item_element) == 1:
+                    print("found the item_element\n")
                     if len(item_element.xpath('./h5[@data-testid="per-mass-header"]')) == 1:
                         rows_serving = item_element.xpath(
                             './h5[@data-testid="per-mass-header"]/preceding-sibling::div[contains(@class,"nutrient__Nutrient")]')
                         rows_density = item_element.xpath(
                             './h5[@data-testid="per-mass-header"]/following-sibling::div[contains(@class,"nutrient__Nutrient")]')
+                        print("rows_serving if:\n", rows_serving)
+                        print("rows_density if:\n",rows_density)
                         perserving = row_dance(rows_serving)
                         density = row_dance(rows_density)
                         perserving = update_nutrients(perserving)
@@ -87,6 +91,7 @@ class A12BurgerkingSpider(scrapy.Spider):
                     else:
                         rows_serving = item_element.xpath(
                             './h5[@data-testid="per-serving-header"]/following-sibling::div[contains(@class,"nutrient__Nutrient")]')
+                        print("rows_serving else:\n", perserving)
                         perserving = row_dance(rows_serving)
                         perserving = update_nutrients(perserving)
                     perserving.update({
@@ -98,5 +103,5 @@ class A12BurgerkingSpider(scrapy.Spider):
                     })
                     yield perserving
                 self.driver.find_element(by=By.XPATH,
-                                         value='//button[@class="close-button__StyledButton-isthh2-0 eAURpv modal__StyledCloseButtonDefault-ihds1d-2 eGeNgW"]').click()
+                                         value='//button[@class="close-button__StyledButton-sc-isthh2-0 knvlRt modal__StyledCloseButtonDefault-sc-ihds1d-2 jtAGhk"]').click()
         self.driver.quit()

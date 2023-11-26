@@ -37,10 +37,12 @@ class A15WagamamaSpider(scrapy.Spider):
         self.driver.quit()
         products = resp.xpath('//div[@class="modal-content"]')
         for product in products:
+            print("product info: ", product, '\n')
             nutrient_dict = {}
             rows = product.xpath('.//tr[@class="k10-recipe-modal__tr"]')
             for row in rows:
                 row_values = row.xpath('./td/text()').getall()
+                print("row_values: ", row_values, "\n")
                 nutrient = row_values[0]
                 perserving = row_values[1]
                 density = row_values[2]

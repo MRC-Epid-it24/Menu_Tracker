@@ -80,4 +80,4 @@ Voila! Here you have the master file for one wave of MenuTracker data.
 
 ***Disclaimer***: use of our codebase is limited to non-commercial purposes. We made every effort to minimise the burden on chain website owners and added download delays in our settings. 
 
-If you have any questions, or have ideas on how to automate the PDF data extraction, please feel free to reach me at Yuru.Huang@mrc-epid.cam.ac.uk.
+If you have any questions, or have ideas on how to automate the PDF data extraction, please feel free to reach out to Jamie Sun, who is maintaining the repo, at Jamie.Sun@mrc-epid.cam.ac.uk.
