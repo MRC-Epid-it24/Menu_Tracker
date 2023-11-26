@@ -39,6 +39,8 @@ combo_PDFDownload(url='https://www.pizzahut.co.uk/restaurants/food/nutritional-i
 # 9. Subway - both formats available, directly scrape from the website
 RunSpider('9_Subway', folder)
 
+RunSpider('9_Subway2', folder)
+
 # 10. Nandos
 RunSpider('10_Nandos', folder)
 

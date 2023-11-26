@@ -10,7 +10,8 @@ class A9SubwaySpider(scrapy.Spider):
     start_urls = ['https://www.subway.com/en-gb/menunutrition']
 
     def parse(self, response):
-        categories = response.xpath('//a[@class="menu-panel-class-main"]/@href').getall()
+        # categories = response.xpath('//a[@class="menu-panel-class-main"]/@href').getall()
+        categories = response.css('a.menu-panel-class-main::attr(href)').getall()
         print("Categories: ", categories, "\n")
         for category in categories:
             cat_name = category.split('/')[-1]
