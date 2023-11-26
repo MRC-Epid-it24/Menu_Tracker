@@ -21,9 +21,9 @@ class A27YatesSpider(scrapy.Spider):
                               item.xpath('.//div[@class="k10-recipe__labels-wrapper-content"]/div/text()').getall()],
                 'kcal': item.xpath(
                     './/div[@class="k10-recipe__nutrients-item"]/span[contains(text(),"Energy (kcal)")]/following-sibling::span/text()').get(),
-                'kj': item.xpath(
-                    './/div[@class="k10-recipe__nutrients-item"]/span[contains(text(),"Energy (kJ)")]/following-sibling::span/text()').get().replace(
-                    ',', ''),
+                # 'kj': item.xpath(
+                #     './/div[@class="k10-recipe__nutrients-item"]/span[contains(text(),"Energy (kJ)")]/following-sibling::span/text()').get().replace(
+                #     ',', ''),
                 'protein': item.xpath(
                     './/div[@class="k10-recipe__nutrients-item"]/span[contains(text(),"Protein (g)")]/following-sibling::span/text()').get(),
                 'carb': item.xpath(
