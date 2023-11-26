@@ -10,9 +10,11 @@ from selenium import webdriver
 class A23RevolutionSpider(scrapy.Spider):
     name = '23_Revolution'
     allowed_domains = ['www.revolution-bars.co.uk']
+    # The commented out start_urls don't work anymore.
     # start_urls = ['https://www.revolution-bars.co.uk/bar/london-america-square/menus/food-menu/']
-    start_urls = ['https://www.revolution-bars.co.uk/bar/london-clapham-high-street/menus/food-menu/']
-    # 'https://www.revolution-bars.co.uk/bar/london-clapham-high-street/menus/brunch-menu/']
+    # start_urls = ['https://www.revolution-bars.co.uk/bar/london-clapham-high-street/menus/food-menu/']
+    # start_urls = ['https://www.revolution-bars.co.uk/bar/london-clapham-high-street/menus/brunch-menu/']
+    start_urls = ['https://www.revolution-bars.co.uk/bar/london-leadenhall/menus/food-menu/']
 
     def __init__(self):
         self.driver = webdriver.Chrome(web_browser_path)
