@@ -3,20 +3,17 @@ from datetime import date
 import requests
 import scrapy
 
-
+# ROBOTSTXT_OBEY = True in settings.py
 class A9SubwaySpider(scrapy.Spider):
     name = '9_Subway'
     allowed_domains = ['www.subway.com']
     start_urls = ['https://www.subway.com/en-gb/menunutrition']
 
     def parse(self, response):
-        # categories = response.xpath('//a[@class="menu-panel-class-main"]/@href').getall()
-        categories = response.css('a.menu-panel-class-main::attr(href)').getall()
-        print("Categories: ", categories, "\n")
+        categories = response.xpath('//a[@class="menu-panel-class-main"]/@href').getall()
+        print(categories)
         for category in categories:
             cat_name = category.split('/')[-1]
-            url= 'https://www.subway.com' + category
-            print("url: ", url, "\n")
             yield scrapy.Request(
                 url='https://www.subway.com' + category, callback=self.parse_category,
                 meta={'cat_name': cat_name}

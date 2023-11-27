@@ -11,7 +11,8 @@ from selenium.webdriver.common.by import By
 class A15WagamamaSpider(scrapy.Spider):
     name = '15_Wagamama'
     allowed_domains = ['www.wagamama.com']
-    start_urls = ['https://www.wagamama.com/our-menu']
+    # start_urls = ['https://www.wagamama.com/our-menu']
+    start_urls = ['https://www.wagamama.com/menu?category=sides-sharing']
 
     def __init__(self):
         self.driver = webdriver.Chrome(web_browser_path)
