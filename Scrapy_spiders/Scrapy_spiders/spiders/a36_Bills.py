@@ -20,19 +20,21 @@ class A36BillsSpider(scrapy.Spider):
     def parse(self, response):
         i = 1
         categories = response.xpath('//div[contains(@class, "k10-course_level_1")]')
+        print("categories:", categories, "\n")
         for category in categories:
-            cat_name = category.xpath('normalize-space(.//div[@class="k10-course__name k10-w-course__name k10-course__name_level_1"]/text())').get()
-            print(cat_name)
+            cat_name = category.xpath('normalize-space(.//div[@class="k10-course__name-text k10-w-course__name-text"]/text())').get()
+            print("cat_name:", cat_name)
             # subcategories = category.xpath('.//div[@class="k10-course k10-course_level_2"]')
             # for subcat in subcategories: 
             # sub_cat_name = subcat.xpath('normalize-space(.//div[@class="k10-course__name k10-w-course__name_level_2 k10-course__name_level_2"]/text())').get()
             items = category.xpath('.//div[contains(@class,"grid-item")]')
+            # items = category.xpath('.//div[contains(@class,"k10-l-grid-item")]').getall()
             for item in items:
                 item_dict = {
                         'collection_date': date.today().strftime("%b-%d-%Y"),
                         'rest_name': "Bill's",
                         'menu_section': cat_name,
-                        'item_name': item.xpath('normalize-space(.//div[@class="k10-recipe__name k10-w-recipe__name"]/text())').get(), 
+                        'item_name': item.xpath('normalize-space(.//span[@class="k10-recipe__name k10-w-recipe__name"]/text())').get(), 
                         'item_description': item.xpath('normalize-space(.//span[@class="k10-recipe__desc k10-w-recipe__desc"]/text())').get()
                     }
                 table = response.xpath(f'(//table)[{i}]')
