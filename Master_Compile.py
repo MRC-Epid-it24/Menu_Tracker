@@ -5,7 +5,7 @@
 import os
 
 from define_collection_wave import folder
-from helpers import combo_PDFDownload, RunSpider, RunScript, java_PDF, greene_king_download, combo_imgDownload, vue_PDF
+from helpers import combo_PDFDownload, combo_PDFDownload_class_name, RunSpider, RunScript, java_PDF, greene_king_download, combo_imgDownload, vue_PDF
 
 os.system('python define_collection_wave.py')
 
@@ -118,7 +118,8 @@ RunScript('31_FlamingGrill')
 # 32. Loch Fyne seafood grill -> No nutrition available
 # combo_PDFDownload('32_LochFyne', prex='https://www.lochfyneseafoodandgrill.co.uk',
 #                   url='https://www.lochfyneseafoodandgrill.co.uk/allergens')
-RunSpider('32_LochFyne', folder)
+# RunSpider('32_LochFyne', folder)
+combo_PDFDownload_class_name('32_LochFyne', url='https://www.lochfyneseafoodandgrill.co.uk/menu', keyword='menus-download')
 
 # 33. PAUL
 RunSpider('33_Paul', folder)

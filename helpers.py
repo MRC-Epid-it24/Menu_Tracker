@@ -90,6 +90,7 @@ def combo_PDFDownload(rest_name, url, keyword='pdf', prex=None, verify=True):
     soup = BeautifulSoup(html.text, 'html.parser')
     urls = soup.select(f"a[href*={keyword}]")
     for url in urls:
+        print(url)
         url_link = url.get('href')
         if 'https://' not in url_link and 'http://' not in url_link:
             if url_link[0] != '/':
@@ -104,6 +105,32 @@ def combo_PDFDownload(rest_name, url, keyword='pdf', prex=None, verify=True):
         filename = filename.replace(':', '')
         filename = filename.replace('?','')
         filePath = os.path.join(path,  filename) # path to save the PDF file
+        print(url_link)
+        print(filePath)
+        PDFDownloader(url=url_link, filePath=filePath)
+    print('finished downloading pdfs for ' + rest_name)
+
+def combo_PDFDownload_class_name(rest_name, url, keyword='pdf', prex=None, verify=True):
+    '''
+    This function identifies all PDFs available for download and save all of them
+    It finds the links by keywords in the class name instead of href
+    :param rest_name: the name of the restaurant
+    :param url: URL for downloading the PDFs
+    :param keyword: keyword for identifying the PDF download link. The default is set to 'pdf'
+    :param prex: if the PDF download link does not contain domain link, add the domain url here
+    :param verify: True or False. whether to allow authentication
+    :return: multiple downloaded PDFs
+    '''
+    path = create_folder(rest_name, folder)
+    html = requests.get(url, headers=headers, verify=verify)
+    soup = BeautifulSoup(html.text, 'html.parser')
+    urls = soup.select(f"a[class*={keyword}]")
+    filenames = soup.select(f"span[class*={keyword}]")
+    for i in range(len(urls)):
+        url = urls[i]
+        url_link = url.get('href') 
+        filename = filenames[i].text + '.pdf'
+        filePath = os.path.join(path,  filename)
         print(url_link)
         print(filePath)
         PDFDownloader(url=url_link, filePath=filePath)
