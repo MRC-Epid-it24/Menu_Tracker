@@ -10,7 +10,7 @@ from time import sleep
 class A50CrusshSpider(scrapy.Spider):
     name = '50_Crussh'
     allowed_domains = ['crussh.com']
-    start_urls = ['https://crussh.com/menu/']
+    start_urls = ['https://www.crussh.com/menu/']
 
     def __init__(self, *args, **kwargs):
         super(A50CrusshSpider, self).__init__(*args, **kwargs)
@@ -22,6 +22,7 @@ class A50CrusshSpider(scrapy.Spider):
     def parse(self, response):
         cat_links = set(response.xpath('//a[contains(@href,"menu-category")]/@href').getall())
         for cat_link in cat_links:
+            print(cat_link)
             yield scrapy.Request(url=cat_link, callback=self.parse_menu)
     
     def parse_menu(self,response):

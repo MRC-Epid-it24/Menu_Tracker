@@ -162,6 +162,7 @@ combo_PDFDownload('44_Boswell', 'https://boswellsgroup.com/menu/')
 
 # 45. Brewhouse
 combo_PDFDownload('45_Brewhouse', 'https://www.brewhouseandkitchen.com/bk-allergies/')
+combo_PDFDownload('45_Brewhouse', 'https://www.brewhouseandkitchen.com/venue/bedford/')
 
 # 46. Cineworld
 combo_PDFDownload('46_Cineworld', url='https://www.cineworld.co.uk/#/', prex='https://www.cineworld.co.uk',
