@@ -76,6 +76,8 @@ RunSpider('19_EmberInns', folder)
 # 20. Chef & Brewer Pub Co.
 # greene_king_download(rest_name='20_Chef', id=6145, url='https://www.chefandbrewer.com/', folder=folder)
 RunSpider('20_ChefBrewer', folder)
+# Download the PDF for kcal data
+RunScript('20_ChefBrewer')
 
 # 21. Table Table
 combo_PDFDownload(url='https://www.tabletable.co.uk/en-gb/allergy-nutrition', rest_name='21_TableTable',
