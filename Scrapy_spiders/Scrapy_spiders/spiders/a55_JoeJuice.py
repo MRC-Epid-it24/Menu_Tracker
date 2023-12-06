@@ -25,16 +25,22 @@ class A55JoejuiceSpider(scrapy.Spider):
     def parse(self, response):
         self.driver.get(response.url)
         sleep(10)
-        self.driver.find_element_by_id('declineButton').click()
+        cookie_button = self.driver.find_element_by_id('declineButton')
+        self.driver.execute_script("arguments[0].click();", cookie_button)
         sleep(1)
         categories = self.driver.find_elements(by = By.XPATH, value = '//div[@data-cy="product-subheader"]')
+        print(categories)
+        print(type(categories))
         for i in range(len(categories)):
             cat_name = categories[i].text
+            print(cat_name)
             items = categories[i].find_elements(by = By.XPATH, value='./following-sibling::div/div[contains(@class,"item")]')
-            for j in range(len(items)):
+            for j in range(len(items)):     
                 item = self.driver.find_element(by=By.XPATH, value=f'((//div[@data-cy="product-subheader"])[{i + 1}]/following-sibling::div/div[contains(@class,"item")])[{j + 1}]')
-                item_description = item.find_element(by=By.XPATH, value= './/p[@class="MuiTypography-root jss99 MuiTypography-caption MuiTypography-colorTextPrimary"]').text
+                item_description = item.find_element(by=By.XPATH, value= './/p[@class="MuiTypography-root jss101 MuiTypography-caption MuiTypography-colorTextPrimary"]').text   
+                print("Item description: ", item_description)
                 item_price = item.find_element(by=By.XPATH, value = './/p[@class="MuiTypography-root MuiTypography-caption MuiTypography-colorTextPrimary MuiTypography-alignLeft"]').text
+                print("Item price: ", item_price)
                 item_button = self.driver.find_element_by_xpath(f'((//div[@data-cy="product-subheader"])[{i + 1}]/following-sibling::div/div[contains(@class,"item")])[{j + 1}]//button')
                 self.driver.execute_script("arguments[0].click();", item_button)
                 sleep(3)
@@ -56,7 +62,9 @@ class A55JoejuiceSpider(scrapy.Spider):
                 except:
                     pass
                 allergens = item_page.xpath('//h3[contains(text(),"Allergens")]/parent::div/ul/li')
+                print("Allergens: ", allergens)
                 nutrients = item_page.xpath('//h3[contains(text(),"Nutrition")]/parent::div/ul/li')
+                print("Nutrients: ", nutrients)
                 item_dict = {
                     'collection_date': date.today().strftime("%b-%d-%Y"),
                     'rest_name': 'JOE & THE JUICE',
@@ -65,6 +73,7 @@ class A55JoejuiceSpider(scrapy.Spider):
                     'item_description': item_description,
                     'price': item_price
                 }
+                print("Item_dict: ", item_dict)
                 if allergens == []:
                     yield item_dict
                 else:

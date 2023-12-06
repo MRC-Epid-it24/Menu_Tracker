@@ -23,6 +23,7 @@ class A56LeonSpider(scrapy.Spider):
         items = soup.xpath('//a[@class="menu-grid__item"]/@href').getall()
         self.driver.quit()
         for item in items:
+            print(item, 'https://leon.co' + item)
             yield scrapy.Request(url='https://leon.co' + item, callback=self.parse_item)
 
     def parse_item(self, response):
@@ -44,4 +45,5 @@ class A56LeonSpider(scrapy.Spider):
                                           '').get()
         }
         item_dict.update(nutrition_dict)
+        print("Item_dict: ", item_dict)
         yield item_dict
