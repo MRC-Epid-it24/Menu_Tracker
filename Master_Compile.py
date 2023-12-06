@@ -182,7 +182,8 @@ combo_PDFDownload('49_CookhousePub', url='https://www.cookhouseandpub.co.uk/en-g
 RunSpider('50_Crussh',json_ = True, folder = folder)
 
 # 51. Farmhouse Inns -> PDF
-greene_king_download(rest_name='51_FarmhouseInns', id='5690', url='https://www.farmhouseinns.co.uk', folder=folder)
+# greene_king_download(rest_name='51_FarmhouseInns', id='5690', url='https://www.farmhouseinns.co.uk', folder=folder)
+RunScript('51_FarmhouseInns')
 
 # 52. Five guys -> PDF
 combo_PDFDownload(rest_name='52_FiveGuys', url='https://www.fiveguys.co.uk/menu', keyword = 'nutrition')
@@ -191,7 +192,8 @@ combo_PDFDownload(rest_name='52_FiveGuys', url='https://www.fiveguys.co.uk/menu'
 RunSpider('53_Harvester', folder)
 
 # 54. Hungry Horse -> a greene king company
-greene_king_download('54_HungryHorse', id='6347', url='https://www.hungryhorse.co.uk', folder=folder)
+# greene_king_download('54_HungryHorse', id='6347', url='https://www.hungryhorse.co.uk', folder=folder)
+RunScript('54_HungryHorse')
 
 # 55. Joe & the Juice
 RunSpider('55_JoeJuice', folder, json_=True)
@@ -200,7 +202,8 @@ RunSpider('55_JoeJuice', folder, json_=True)
 RunSpider('56_Leon', folder)
 
 # 57. greene king
-greene_king_download('57_GreeneKing', id='8183', url='https://www.greeneking-pubs.co.uk', folder=folder)
+# greene_king_download('57_GreeneKing', id='8183', url='https://www.greeneking-pubs.co.uk', folder=folder)
+RunScript('57_GreeneKing')
 
 # 58. Vue -> PDF
 vue_PDF('58_Vue', url='https://www.myvue.com/legal/nutritional-information', 
