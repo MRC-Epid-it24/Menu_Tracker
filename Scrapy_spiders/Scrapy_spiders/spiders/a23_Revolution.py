@@ -58,6 +58,6 @@ class A23RevolutionSpider(scrapy.Spider):
                     'price': price,
                     'allergens': allergens
                 }
-                # print(nutrient_dict)
+                print(item_dict)
                 item_dict.update(nutrient_dict)
                 yield item_dict
