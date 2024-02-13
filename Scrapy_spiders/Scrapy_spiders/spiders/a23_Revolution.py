@@ -27,6 +27,7 @@ class A23RevolutionSpider(scrapy.Spider):
         itemnames = resp_new.xpath(f'//div[@class="menusitem"]//p/strong/text()').getall()
         for i in range(len(items)):
             item = self.driver.find_elements_by_xpath('//li[@class="menusitem__title__icon menusitem__title__icon--nutrition"]')
+            # print 
             if i > len(item) - 1:
                 print("The item is not found.\n", itemnames, "\n")
                 print("The last item found is items: \n", items, "\n", "item:\n", item, "\n")
