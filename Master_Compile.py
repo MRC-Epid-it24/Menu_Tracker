@@ -5,7 +5,7 @@
 import os
 
 from define_collection_wave import folder
-from helpers import combo_PDFDownload, combo_PDFDownload_class_name, RunSpider, RunScript, java_PDF, greene_king_download, combo_imgDownload, vue_PDF
+from helpers import combo_PDFDownload, combo_PDFDownload_class_name, RunSpider, RunScript, java_PDF, greene_king_download, combo_imgDownload, vue_PDF, PDFDownloader, create_folder
 
 os.system('python define_collection_wave.py')
 
@@ -233,8 +233,11 @@ RunSpider('63_Pieminister', folder)
 RunScript('64_Pure')
 
 # 65. Sainsbury Cafe
+# combo_PDFDownload('65_SainsburysCafe',
+#                   'https://www.sainsburys.co.uk/shop/gb/groceries/get-ideas/our-instore-services/--sainsburys-cafe',
+#                   prex='https://www.sainsburys.co.uk')
 combo_PDFDownload('65_SainsburysCafe',
-                  'https://www.sainsburys.co.uk/shop/gb/groceries/get-ideas/our-instore-services/--sainsburys-cafe',
+                  'https://help.sainsburys.co.uk/help/terms-and-conditions/sainsburyscafe',
                   prex='https://www.sainsburys.co.uk')
 
 # 66. Soho Cafe
@@ -273,7 +276,10 @@ RunSpider('75_VintageInns', folder)
 
 # 76. Wasabi
 # RunScript('76_Wasabi')
-java_PDF('76_Wasabi', url = 'https://www.wasabi.uk.com/our-food/', link_=False, xpath_ = '//a[contains(@href, "nutrition")]')
+# java_PDF('76_Wasabi', url = 'https://www.wasabi.uk.com/our-food/', link_=False, xpath_ = '//a[contains(@href, "nutrition")]')
+Folder_path = create_folder('76_Wasabi', define_collection_wave.folder)
+PDFDownloader(url='https://wasabiuk.wpengine.com/wp-content/uploads/2023/11/WAS_Nutritional_Guide_091123_V5.pdf',filePath= Folder_path +'/wasabi_nutrition.pdf')
+
 
 # 77. Waterfields
 RunSpider('77_Waterfields', folder, json_=True)
@@ -310,7 +316,8 @@ combo_PDFDownload('86_HonestBurger', url='https://www.honestburgers.co.uk/allerg
 combo_PDFDownload('87_AMT', url='http://amtcoffee.co.uk/types/drinks/')
 
 # 88. Chicken Cottage
-combo_imgDownload('88_ChickenCottage','https://chickencottage.com/our-food/',folder)
+# combo_imgDownload('88_ChickenCottage','https://chickencottage.com/our-food/',folder)
+combo_imgDownload('88_ChickenCottage','https://chickencottage.com/our-food/', define_collection_wave.folder)
 
 # 89. Browns
 RunSpider('89_Browns', folder)
