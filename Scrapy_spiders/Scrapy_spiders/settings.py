@@ -16,7 +16,8 @@ NEWSPIDER_MODULE = 'Scrapy_spiders.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36'
-# Obey robots.txt rules
+# Obey robots.txt rules; Subway website behaves randomly in response to this;
+# You can try set this to be True or False and see which setting gets you data from the website. 
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)

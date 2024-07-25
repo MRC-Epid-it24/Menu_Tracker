@@ -103,5 +103,5 @@ class A12BurgerkingSpider(scrapy.Spider):
                     })
                     yield perserving
                 self.driver.find_element(by=By.XPATH,
-                                         value='//button[@class="close-button__StyledButton-sc-isthh2-0 knvlRt modal__StyledCloseButtonDefault-sc-ihds1d-2 jtAGhk"]').click()
+                                         value='//button[@data-testid="close-button"]').click()
         self.driver.quit()

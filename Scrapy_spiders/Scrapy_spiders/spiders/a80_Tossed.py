@@ -31,9 +31,9 @@ class A80TossedSpider(scrapy.Spider):
             self.driver.get(category_urls[i])
             cat_name = category_names[i]
             sleep(3)
-            items = self.driver.find_elements(by=By.XPATH, value='//div[@class="css-12knhsc e1olru1g11"]')
+            items = self.driver.find_elements(by=By.XPATH, value='//div[@class="css-tum6br e1olru1g11"]')
             for i in range(len(items)):
-                item = self.driver.find_elements(by=By.XPATH, value='//div[@class="css-12knhsc e1olru1g11"]')[i]
+                item = self.driver.find_elements(by=By.XPATH, value='//div[@class="css-tum6br e1olru1g11"]')[i]
                 item_type = item.get_attribute('data-test-type')
                 self.driver.execute_script("arguments[0].click();", item)
                 try:

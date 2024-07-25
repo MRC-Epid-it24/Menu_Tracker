@@ -27,7 +27,7 @@ drink_buttons = browser.find_elements(by=By.XPATH, value= '//div[@data-cy = "pro
 
 def parse_item(page, size=None, milk=None):
     soup = BeautifulSoup(page, 'html.parser')
-    product_detail = soup.find_all('div', {'class': 'componentWrapperWhite'})
+    product_detail = soup.find_all('div', {'class': 'productViewstyles__DataWrapper-sc-1f5jhow-1 fZAjTD'})
     if product_detail:
         product_name = product_detail[0].h1.text if product_detail[0].h1 else product_detail[0].h2.text
         product_description = product_detail[0].p.text if product_detail[0].p else "N/A"
@@ -36,8 +36,10 @@ def parse_item(page, size=None, milk=None):
         row_dict = {'Product_Name': product_name, 'Product_Description': product_description,
             'Size': size, 'Milk': milk,
             'Product_Ingredients': product_ingredients}
+        print("\n\n\nProduct Detail:\n\n\n", row_dict, "\n\n\n")
     else:
-        print("The page with error: \n", page, "\n\n")
+        # print("The page with error: \n", page, "\n\n")
+        print("\n\n\n The page has error: \n\n\n")
         return {}
     alltables = soup.find_all('table')
     table_titles = [table.h2.text for table in alltables]
@@ -76,28 +78,28 @@ def parse_item(page, size=None, milk=None):
         return row_dict
     
     else:
-        print("The page with no table: \n", page, "\n\n")
+        print("The page has no table: \n\n\n")
 
         if row_dict:
             return row_dict
         else:
             return {}
 
-
-    
-
-
 records = []
 for drink in drink_buttons:
-    print(drink.text, '\n')
-    # The page is broken. Skip it.
-    if drink.text == 'Mint Tea':
-        continue
-    category = drink.find_element(by = By.XPATH, value = ".//parent::div/preceding-sibling::div[@class='categoryHeader']").text
-    # print(category)
+    print('\n\n', drink.text, '\n\n')
+    # # The page is broken. Skip it.
+    # if drink.text == 'Mint Tea':
+    #     continue
+    category = drink.find_element(by = By.XPATH, value = "../../h2[@class='categoryHeader']").text
+    print('\n', category, '\n')
     browser.execute_script("arguments[0].click();", drink)
+
+    # aria-controls="content-allergens-information"
+    # aria-controls="content-nutritional-information"
     sleep(5)
     sizes = browser.find_elements(by=By.XPATH, value='//div[@class="filterGroup size"]/button')
+    #value='//p[contains(@class, "customiseDrinkstyles__StyledCustomiseDrink-sc-19htd1k-0 hTNDBE") and contains(@class, 'igsAgt')]/following-sibling::div[contains(@class, 'filterGroup')][1]//button')
     milk_choices = browser.find_elements(by=By.XPATH, value='//div[@class="filterGroup milk"]/button')
     if len(sizes) > 0:
         for size in sizes:
@@ -123,7 +125,7 @@ for drink in drink_buttons:
             row = parse_item(page=browser.page_source)
             row.update({'Category': category})
             records.append(row)
-    close_button = browser.find_element(by=By.XPATH, value = '//button[@class="closeButton"]')
+    close_button = browser.find_element(by=By.XPATH, value = '//button[@class="productViewstyles__CloseButton-sc-1f5jhow-2 eISAhT"]')
     close_button.click()
     sleep(2)
 
@@ -132,8 +134,9 @@ food_button = browser.find_elements(by=By.XPATH, value= '//div[@data-cy = "produ
 
 
 for food in range(len(food_button)):
-    category = food_button[food].find_element_by_xpath(
-        ".//parent::div/preceding-sibling::div[@class='categoryHeader']").text
+    # category = food_button[food].find_element_by_xpath(
+    #     ".//parent::div/preceding-sibling::div[@class='category-header']").text
+    category = food_button[food].find_element_by_xpath("../../h2[@class='categoryHeader']").text
     browser.execute_script("arguments[0].click();", food_button[food])
     sleep(4)
     try:
@@ -142,7 +145,7 @@ for food in range(len(food_button)):
         records.append(row)
     except:
         print('item not captured')
-    close_button = browser.find_element(by=By.XPATH, value='//button[@class="closeButton"]')
+    close_button = browser.find_element(by=By.XPATH, value='//button[@class="productViewstyles__CloseButton-sc-1f5jhow-2 eISAhT"]')
     close_button.click()
     sleep(2)
 

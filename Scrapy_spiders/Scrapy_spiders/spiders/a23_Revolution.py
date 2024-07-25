@@ -1,6 +1,3 @@
-from datetime import date
-from time import sleep
-
 import scrapy
 from browserPath import web_browser_path
 from scrapy import Selector

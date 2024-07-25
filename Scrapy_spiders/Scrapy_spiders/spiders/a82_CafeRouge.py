@@ -6,7 +6,8 @@ import scrapy
 class A82CaferougeSpider(scrapy.Spider):
     name = '82_CafeRouge'
     allowed_domains = ['www.caferouge.com', 'menus.tenkites.com']
-    start_urls = ['https://menus.tenkites.com/thebigtg/mobilemenuscaferouge02']
+    # start_urls = ['https://menus.tenkites.com/thebigtg/mobilemenuscaferouge02']
+    start_urls = ['https://www.caferouge.com/restaurants/london/st-katherine-docks/menu']
 
     def parse(self, response):
         cat_links = response.xpath('//div[@class="k10-menu-selector__option"]/span')
@@ -15,7 +16,7 @@ class A82CaferougeSpider(scrapy.Spider):
             link = cat_link.xpath('./@data-menu-identifier').get()
             name = cat_link.xpath('normalize-space(./span/text())').get()
             yield scrapy.Request(
-                url=f'https://menus.tenkites.com//thebigtg/mobilemenuscaferouge02?cl=true&mguid={link}&internalrequest=true',
+                url=f'https://menus.tenkites.com//thebigtg/staging/mobilemenuscaferouge09?cl=true&mguid={link}&internalrequest=true',
                 callback=self.parse_item, meta={'menu_name': name})
 
     def parse_item(self, response):

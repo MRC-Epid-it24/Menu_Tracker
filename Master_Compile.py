@@ -275,10 +275,10 @@ RunSpider('74_TownKitchenPubs', folder)
 RunSpider('75_VintageInns', folder)
 
 # 76. Wasabi
-# RunScript('76_Wasabi')
+RunScript('76_Wasabi')
 # java_PDF('76_Wasabi', url = 'https://www.wasabi.uk.com/our-food/', link_=False, xpath_ = '//a[contains(@href, "nutrition")]')
-Folder_path = create_folder('76_Wasabi', define_collection_wave.folder)
-PDFDownloader(url='https://wasabiuk.wpengine.com/wp-content/uploads/2023/11/WAS_Nutritional_Guide_091123_V5.pdf',filePath= Folder_path +'/wasabi_nutrition.pdf')
+# Folder_path = create_folder('76_Wasabi', folder)
+# PDFDownloader(url='https://wasabiuk.wpengine.com/wp-content/uploads/2023/11/WAS_Nutritional_Guide_091123_V5.pdf',filePath= Folder_path +'/wasabi_nutrition.pdf')
 
 
 # 77. Waterfields
@@ -317,7 +317,7 @@ combo_PDFDownload('87_AMT', url='http://amtcoffee.co.uk/types/drinks/')
 
 # 88. Chicken Cottage
 # combo_imgDownload('88_ChickenCottage','https://chickencottage.com/our-food/',folder)
-combo_imgDownload('88_ChickenCottage','https://chickencottage.com/our-food/', define_collection_wave.folder)
+combo_imgDownload('88_ChickenCottage','https://chickencottage.com/our-food/', folder)
 
 # 89. Browns
 RunSpider('89_Browns', folder)

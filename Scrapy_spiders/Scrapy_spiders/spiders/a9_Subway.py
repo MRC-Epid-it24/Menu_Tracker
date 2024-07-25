@@ -8,18 +8,30 @@ class A9SubwaySpider(scrapy.Spider):
     name = '9_Subway'
     allowed_domains = ['www.subway.com']
     start_urls = ['https://www.subway.com/en-gb/menunutrition']
+    request_count = 0
+
+    def sleep_based_on_request_count(self):
+        self.request_count += 1
+        if self.request_count % 10 == 0:  # After every 10 requests, sleep longer
+            time.sleep(10)
+        else:
+            time.sleep(2)  # Default short sleep
 
     def parse(self, response):
+        self.sleep_based_on_request_count()
         categories = response.xpath('//a[@class="menu-panel-class-main"]/@href').getall()
         print(categories)
         for category in categories:
+            print(category)
             cat_name = category.split('/')[-1]
+            print(cat_name)
             yield scrapy.Request(
                 url='https://www.subway.com' + category, callback=self.parse_category,
                 meta={'cat_name': cat_name}
             )
 
     def parse_category(self, response):
+        self.sleep_based_on_request_count()
         items = response.xpath('//div[@class="menu-category-type clearfix"]/div')
         for item in items:
             if item.xpath('./@id').get() is not None:
@@ -29,6 +41,7 @@ class A9SubwaySpider(scrapy.Spider):
                                                                      'cat_name': response.meta['cat_name']})
 
     def parse_item(self, response):
+        self.sleep_based_on_request_count()
         productID = response.meta['productID']
         item_dict = {
             'collection_date': date.today().strftime("%b-%d-%Y"),
